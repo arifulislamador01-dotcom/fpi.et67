@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ফরিদপুর পলিটেকনিক ইনস্টিটিউট - ইলেকট্রিক্যাল টেকনোলজি বিভাগ - শিক্ষা পোর্টাল">
+    <title>⚡ Electrical Technology - Education Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .login-particles{position:absolute;inset:0;overflow:hidden}
+        .particle{position:absolute;width:4px;height:4px;background:var(--accent);border-radius:50%;animation:float 6s ease-in-out infinite;opacity:0.4}
+        .bolt-svg{position:absolute;opacity:0.08;animation:pulse 4s ease infinite}
+        .electric-arc{position:absolute;width:200px;height:200px;border:2px solid rgba(245,158,11,0.1);border-radius:50%;animation:rotate 20s linear infinite}
+        .welcome-text{font-size:2.2rem;font-weight:900;text-align:center;margin-bottom:8px;background:linear-gradient(135deg,#f59e0b,#3b82f6,#10b981);background-size:200% 200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:electricFlow 4s ease infinite}
+        .welcome-sub{text-align:center;color:var(--text2);margin-bottom:28px;font-size:0.9rem;line-height:1.6}
+        .dept-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(245,158,11,0.15);color:var(--accent);padding:6px 16px;border-radius:20px;font-size:0.75rem;font-weight:700;margin:0 auto 20px;letter-spacing:0.5px}
+        .input-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text2);font-size:0.9rem;pointer-events:none}
+        .form-input.with-icon{padding-left:40px}
+        .password-toggle{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text2);cursor:pointer;font-size:1rem}
+        .login-footer{text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+        .login-footer p{font-size:0.7rem;color:var(--text2);line-height:1.5}
+        .login-footer a{color:var(--accent);text-decoration:none}
+        .shake{animation:shake 0.5s ease}
+        @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+        .lang-switch{position:absolute;top:20px;right:20px;z-index:50;display:flex;gap:4px}
+        .lang-btn{padding:6px 14px;border:1px solid var(--border);border-radius:8px;background:var(--glass);color:var(--text2);font-size:0.75rem;cursor:pointer;transition:all 0.3s;font-family:inherit}
+        .lang-btn.active{background:var(--accent);color:#000;border-color:var(--accent)}
+    </style>
+</head>
+<body>
+    <div class="login-page" id="loginPage">
+        <!-- Language Switch -->
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLang('bn')">বাংলা</button>
+            <button class="lang-btn" onclick="setLang('en')">English</button>
+        </div>
+
+        <!-- Background Effects -->
+        <div class="login-bg-effect">
+            <div class="login-particles" id="particles"></div>
+            <div class="electric-arc" style="top:10%;left:5%;width:300px;height:300px"></div>
+            <div class="electric-arc" style="bottom:10%;right:5%;width:250px;height:250px;animation-direction:reverse"></div>
+            <div class="electric-line" style="top:20%;left:0;width:100%;animation-delay:0s"></div>
+            <div class="electric-line" style="top:50%;left:0;width:100%;animation-delay:1s"></div>
+            <div class="electric-line" style="top:80%;left:0;width:100%;animation-delay:2s"></div>
+            <svg class="bolt-svg" style="top:15%;right:10%;width:120px" viewBox="0 0 100 140">
+                <polygon points="50,0 65,55 85,55 40,140 45,75 20,75" fill="#f59e0b"/>
+            </svg>
+            <svg class="bolt-svg" style="bottom:20%;left:8%;width:80px" viewBox="0 0 100 140">
+                <polygon points="50,0 65,55 85,55 40,140 45,75 20,75" fill="#3b82f6"/>
+            </svg>
+        </div>
+
+        <!-- Login Container -->
+        <div class="login-container">
+            <div class="login-card" id="loginCard">
+                <!-- Logo -->
+                <div class="login-logo">⚡</div>
+                
+                <!-- Title -->
+                <div class="welcome-text" data-bn="স্বাগতম!" data-en="Welcome!">স্বাগতম!</div>
+                <div class="login-title" data-bn="ইলেকট্রিক্যাল টেকনোলজি" data-en="Electrical Technology">ইলেকট্রিক্যাল টেকনোলজি</div>
+                <div class="login-subtitle" data-bn="ফরিদপুর পলিটেকনিক ইনস্টিটিউট | শিক্ষা পোর্টাল" data-en="Faridpur Polytechnic Institute | Education Portal">ফরিদপুর পলিটেকনিক ইনস্টিটিউট | শিক্ষা পোর্টাল</div>
+                
+                <div style="display:flex;justify-content:center">
+                    <span class="dept-badge">⚡ <span data-bn="ইলেকট্রিক্যাল টেকনোলজি" data-en="Electrical Technology">ইলেকট্রিক্যাল টেকনোলজি</span></span>
+                </div>
+
+                <!-- Login Type Toggle -->
+                <div class="login-type-toggle">
+                    <button class="login-type-btn active" onclick="switchLoginType('student')" data-bn="🎓 স্টুডেন্ট লগইন" data-en="🎓 Student Login">🎓 স্টুডেন্ট লগইন</button>
+                    <button class="login-type-btn" onclick="switchLoginType('teacher')" data-bn="👨‍🏫 টিচার লগইন" data-en="👨‍🏫 Teacher Login">👨‍🏫 টিচার লগইন</button>
+                </div>
+
+                <!-- Student Login Form -->
+                <form id="studentForm" onsubmit="handleStudentLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label" data-bn="সেমিস্টার নির্বাচন করুন" data-en="Select Semester">সেমিস্টার নির্বাচন করুন</label>
+                        <select class="form-select" id="semester" required>
+                            <option value="" data-bn="-- সেমিস্টার বেছে নিন --" data-en="-- Choose Semester --">-- সেমিস্টার বেছে নিন --</option>
+                            <option value="1">সেমিস্টার ১ (Semester 1)</option>
+                            <option value="2">সেমিস্টার ২ (Semester 2)</option>
+                            <option value="3">সেমিস্টার ৩ (Semester 3)</option>
+                            <option value="4">সেমিস্টার ৪ (Semester 4)</option>
+                            <option value="5">সেমিস্টার ৫ (Semester 5)</option>
+                            <option value="6">সেমিস্টার ৬ (Semester 6)</option>
+                            <option value="7">সেমিস্টার ৭ (Semester 7)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-bn="শিফট নির্বাচন করুন" data-en="Select Shift">শিফট নির্বাচন করুন</label>
+                        <select class="form-select" id="shift" required>
+                            <option value="" data-bn="-- শিফট বেছে নিন --" data-en="-- Choose Shift --">-- শিফট বেছে নিন --</option>
+                            <option value="1">শিফট ১ (1st Shift)</option>
+                            <option value="2">শিফট ২ (2nd Shift)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-bn="বোর্ড রোল নম্বর" data-en="Board Roll Number">বোর্ড রোল নম্বর</label>
+                        <div style="position:relative">
+                            <span class="input-icon">🎫</span>
+                            <input type="text" class="form-input with-icon" id="studentRoll" placeholder="যেমন: 747228" maxlength="6" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-bn="পাসওয়ার্ড (৪ ডিজিট)" data-en="Password (4 Digits)">পাসওয়ার্ড (৪ ডিজিট)</label>
+                        <div style="position:relative">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" class="form-input with-icon" id="studentPass" placeholder="****" maxlength="4" required>
+                            <button type="button" class="password-toggle" onclick="togglePass('studentPass')">👁️</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-bn="ফোন নম্বর" data-en="Phone Number">ফোন নম্বর</label>
+                        <div style="position:relative">
+                            <span class="input-icon">📱</span>
+                            <input type="tel" class="form-input with-icon" id="studentPhone" placeholder="01XXXXXXXXX" maxlength="11">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-login" data-bn="🔓 স্টুডেন্ট লগইন" data-en="🔓 Student Login">🔓 স্টুডেন্ট লগইন</button>
+                </form>
+
+                <!-- Teacher Login Form -->
+                <form id="teacherForm" class="hidden" onsubmit="handleTeacherLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label" data-bn="টিচার আইডি" data-en="Teacher ID">টিচার আইডি</label>
+                        <div style="position:relative">
+                            <span class="input-icon">👨‍🏫</span>
+                            <input type="text" class="form-input with-icon" id="teacherId" placeholder="teacher01" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-bn="পাসওয়ার্ড" data-en="Password">পাসওয়ার্ড</label>
+                        <div style="position:relative">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" class="form-input with-icon" id="teacherPass" placeholder="******" required>
+                            <button type="button" class="password-toggle" onclick="togglePass('teacherPass')">👁️</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-login" data-bn="🔓 টিচার লগইন" data-en="🔓 Teacher Login">🔓 টিচার লগইন</button>
+                </form>
+
+                <div id="loginError" style="display:none;text-align:center;color:#ef4444;margin-top:12px;font-size:0.8rem"></div>
+
+                <!-- Footer -->
+                <div class="login-footer">
+                    <p data-bn="ডেভেলপ করেছেন: মোঃ আরিফুল ইসলাম" data-en="Developed by: Md. Ariful Islam">ডেভেলপ করেছেন: <a href="#">মোঃ আরিফুল ইসলাম</a></p>
+                    <p data-bn="ফরিদপুর পলিটেকনিক ইনস্টিটিউট | ৭ম পর্ব | ইলেকট্রিক্যাল টেকনোলজি" data-en="Faridpur Polytechnic Institute | 7th Semester | Electrical Technology">ফরিদপুর পলিটেকনিক ইনস্টিটিউট | ৭ম পর্ব | ইলেকট্রিক্যাল টেকনোলজি</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script>
+        let currentLang = 'bn';
+
+        // Create particles
+        (function(){
+            const c = document.getElementById('particles');
+            for(let i=0;i<40;i++){
+                const p = document.createElement('div');
+                p.className='particle';
+                p.style.left=Math.random()*100+'%';
+                p.style.top=Math.random()*100+'%';
+                p.style.animationDelay=Math.random()*6+'s';
+                p.style.animationDuration=(4+Math.random()*4)+'s';
+                p.style.width=p.style.height=(2+Math.random()*4)+'px';
+                if(Math.random()>0.5) p.style.background='#3b82f6';
+                c.appendChild(p);
+            }
+        })();
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('[data-'+lang+']').forEach(el => {
+                el.textContent = el.getAttribute('data-'+lang);
+            });
+            localStorage.setItem('lang', lang);
+        }
+
+        function switchLoginType(type) {
+            document.querySelectorAll('.login-type-btn').forEach((b,i) => {
+                b.classList.toggle('active', (type==='student'&&i===0)||(type==='teacher'&&i===1));
+            });
+            document.getElementById('studentForm').classList.toggle('hidden', type!=='student');
+            document.getElementById('teacherForm').classList.toggle('hidden', type!=='teacher');
+            document.getElementById('loginError').style.display='none';
+        }
+
+        function togglePass(id) {
+            const inp = document.getElementById(id);
+            inp.type = inp.type==='password'?'text':'password';
+        }
+
+        function handleStudentLogin(e) {
+            e.preventDefault();
+            const roll = document.getElementById('studentRoll').value.trim();
+            const pass = document.getElementById('studentPass').value.trim();
+            const sem = document.getElementById('semester').value;
+            const shift = document.getElementById('shift').value;
+            const phone = document.getElementById('studentPhone').value.trim();
+
+            if(pass.length!==4||isNaN(pass)){
+                showError('পাসওয়ার্ড অবশ্যই ৪ ডিজিটের হতে হবে!'); return;
+            }
+
+            const student = STUDENTS.find(s => s.roll == roll);
+            if(!student){
+                showError('বোর্ড রোল নম্বর সঠিক নয়!'); return;
+            }
+
+            // Save session
+            const session = {type:'student', roll:student.roll, name:student.name, nameBn:student.nameBn,
+                semester:sem, shift:shift, phone:phone||student.phone, gender:student.gender, studentData:student};
+            localStorage.setItem('session', JSON.stringify(session));
+            localStorage.setItem('lang', currentLang);
+
+            // Store phone for teacher view
+            let phones = JSON.parse(localStorage.getItem('studentPhones')||'{}');
+            phones[student.roll] = phone||student.phone;
+            localStorage.setItem('studentPhones', JSON.stringify(phones));
+
+            window.location.href = 'dashboard.html';
+        }
+
+        function handleTeacherLogin(e) {
+            e.preventDefault();
+            const id = document.getElementById('teacherId').value.trim();
+            const pass = document.getElementById('teacherPass').value.trim();
+
+            if(!TEACHER_CREDENTIALS[id] || TEACHER_CREDENTIALS[id].password !== pass){
+                showError('টিচার আইডি বা পাসওয়ার্ড সঠিক নয়!'); return;
+            }
+
+            const teacher = TEACHERS[TEACHER_CREDENTIALS[id].teacherId - 1];
+            const session = {type:'teacher', teacherId:teacher.id, name:teacher.name, nameBn:teacher.nameBn};
+            localStorage.setItem('session', JSON.stringify(session));
+            localStorage.setItem('lang', currentLang);
+            window.location.href = 'dashboard.html';
+        }
+
+        function showError(msg) {
+            const el = document.getElementById('loginError');
+            el.textContent = msg; el.style.display = 'block';
+            document.getElementById('loginCard').classList.add('shake');
+            setTimeout(()=>document.getElementById('loginCard').classList.remove('shake'),500);
+        }
+
+        // Check existing session
+        if(localStorage.getItem('session')){
+            window.location.href = 'dashboard.html';
+        }
+
+        // Load saved language
+        const savedLang = localStorage.getItem('lang');
+        if(savedLang && savedLang !== currentLang) {
+            currentLang = savedLang;
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.toggle('active', b.textContent.includes(savedLang==='bn'?'বাংলা':'English'));
+            });
+            document.querySelectorAll('[data-'+savedLang+']').forEach(el => {
+                el.textContent = el.getAttribute('data-'+savedLang);
+            });
+        }
+    </script>
+</body>
+</html>
