@@ -55,23 +55,22 @@ const STUDENTS = [
 ];
 
 const TEACHERS = [
-    {id:1, name:"Sohel Mollah", nameBn:"সোহেল মোল্লা", short:"SM", subject:"Business Communication (26803)", phone:"01711000001", whatsapp:"01711000001"},
-    {id:2, name:"Towhidur Rahman", nameBn:"তৌহিদুর রহমান", short:"TR2", subject:"Innovation & Entrepreneurship (21803)", phone:"01711000002", whatsapp:"01711000002"},
-    {id:3, name:"Saiful Islam Bappi", nameBn:"সাইফুল ইসলাম বাপ্পী", short:"SIB", subject:"AC Machines-II (26771)", phone:"01711000003", whatsapp:"01711000003"},
-    {id:4, name:"Mosarof Hossain", nameBn:"মোসারফ হোসেন", short:"MH", subject:"Transmission & Distribution of Electrical Power-II (26772)", phone:"01711000004", whatsapp:"01711000004"},
-    {id:5, name:"Rejaul Karim", nameBn:"রেজাউল করিম", short:"RK", subject:"Switch Gear & Protection (26773)", phone:"01711000005", whatsapp:"01711000005"},
-    {id:6, name:"Rakibul Islam", nameBn:"রাকিবুল ইসলাম", short:"RI", subject:"Electrical Engineering Project-II (26774)", phone:"01711000006", whatsapp:"01711000006"},
-    {id:7, name:"Mosarof Hossain", nameBn:"মোসারফ হোসেন", short:"MH2", subject:"Automation Engineering & PLC (26875)", phone:"01711000004", whatsapp:"01711000004"}
+    {id:1, name:"Sohel Mollah", nameBn:"সোহেল মোল্লা", short:"SM", subjects:["Business Communication (25831)"], phone:"01711000001", whatsapp:"01711000001"},
+    {id:2, name:"Nahida Akter", nameBn:"নাহিদা আক্তার", short:"NA", subjects:["Innovation & Entrepreneurship (25853)"], phone:"01711000002", whatsapp:"01711000002"},
+    {id:3, name:"Md. Mosharof Hosen", nameBn:"মোঃ মোশারফ হোসেন", short:"MH", subjects:["AC Machines-II (26771)"], phone:"01711000003", whatsapp:"01711000003"},
+    {id:4, name:"Tawfidur Rahman", nameBn:"তৌফিদুর রহমান", short:"TR", subjects:["T&D Power-II (26772)","Automation & PLC (26875)"], phone:"01711000004", whatsapp:"01711000004"},
+    {id:5, name:"Rakibul Islam", nameBn:"রাকিবুল ইসলাম", short:"RI", subjects:["Switch Gear & Protection (26773)"], phone:"01711000005", whatsapp:"01711000005"},
+    {id:6, name:"Razaul Karim", nameBn:"রাজাউল করিম", short:"RK", subjects:["Project-II (26774)"], phone:"01711000006", whatsapp:"01711000006"}
 ];
 
 const SUBJECTS = [
-    {code:"26803", name:"Business Communication", nameBn:"বিজনেস কমিউনিকেশন", teacher:"Sohel Mollah", teacherBn:"সোহেল মোল্লা", credit:2, type:"Theory"},
-    {code:"21803", name:"Innovation & Entrepreneurship", nameBn:"ইনোভেশন এন্ড এন্ট্রাপ্রেনারশিপ", teacher:"Towhidur Rahman", teacherBn:"তৌহিদুর রহমান", credit:2, type:"Theory"},
-    {code:"26771", name:"AC Machines-II", nameBn:"এসি মেশিনস-২", teacher:"Saiful Islam Bappi", teacherBn:"সাইফুল ইসলাম বাপ্পী", credit:4, type:"Theory+Practical"},
-    {code:"26772", name:"Transmission & Distribution of Electrical Power-II", nameBn:"ট্রান্সমিশন এন্ড ডিস্ট্রিবিউশন অফ ইলেকট্রিক্যাল পাওয়ার-২", teacher:"Mosarof Hossain", teacherBn:"মোসারফ হোসেন", credit:4, type:"Theory+Practical"},
-    {code:"26773", name:"Switch Gear & Protection", nameBn:"সুইচ গিয়ার এন্ড প্রটেকশন", teacher:"Rejaul Karim", teacherBn:"রেজাউল করিম", credit:4, type:"Theory+Practical"},
-    {code:"26774", name:"Electrical Engineering Project-II", nameBn:"ইলেকট্রিক্যাল ইঞ্জিনিয়ারিং প্রজেক্ট-২", teacher:"Rakibul Islam", teacherBn:"রাকিবুল ইসলাম", credit:4, type:"Project"},
-    {code:"26875", name:"Automation Engineering & PLC", nameBn:"অটোমেশন ইঞ্জিনিয়ারিং এন্ড পিএলসি", teacher:"Mosarof Hossain", teacherBn:"মোসারফ হোসেন", credit:4, type:"Theory+Practical"}
+    {code:"25831", name:"Business Communication", nameBn:"বিজনেস কমিউনিকেশন", teacher:"Sohel Mollah", teacherBn:"সোহেল মোল্লা", credit:2, type:"Theory"},
+    {code:"25853", name:"Innovation & Entrepreneurship", nameBn:"ইনোভেশন এন্ড এন্ট্রাপ্রেনারশিপ", teacher:"Nahida Akter", teacherBn:"নাহিদা আক্তার", credit:2, type:"Theory"},
+    {code:"26771", name:"AC Machines-II", nameBn:"এসি মেশিনস-২", teacher:"Md. Mosharof Hosen", teacherBn:"মোঃ মোশারফ হোসেন", credit:4, type:"Theory+Practical"},
+    {code:"26772", name:"T&D of Electrical Power-II", nameBn:"ট্রান্সমিশন এন্ড ডিস্ট্রিবিউশন-২", teacher:"Tawfidur Rahman", teacherBn:"তৌফিদুর রহমান", credit:4, type:"Theory+Practical"},
+    {code:"26773", name:"Switch Gear & Protection", nameBn:"সুইচ গিয়ার এন্ড প্রটেকশন", teacher:"Rakibul Islam", teacherBn:"রাকিবুল ইসলাম", credit:4, type:"Theory+Practical"},
+    {code:"26774", name:"Electrical Engineering Project-II", nameBn:"ইলেকট্রিক্যাল ইঞ্জিনিয়ারিং প্রজেক্ট-২", teacher:"Razaul Karim", teacherBn:"রাজাউল করিম", credit:4, type:"Project"},
+    {code:"26875", name:"Automation Engineering & PLC", nameBn:"অটোমেশন ইঞ্জিনিয়ারিং এন্ড পিএলসি", teacher:"Tawfidur Rahman", teacherBn:"তৌফিদুর রহমান", credit:4, type:"Theory+Practical"}
 ];
 
 const ROUTINE = {
@@ -79,22 +78,22 @@ const ROUTINE = {
     daysBn: ['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার'],
     times: ['8:00-8:45','8:45-9:30','9:30-10:15','10:15-11:00','11:00-11:45','11:45-12:30','12:30-1:15'],
     schedule: {
-        SUN: ['26774/RI','26803/SM','26875/MH','26771/SIB','COM405','COM405','X'],
-        MON: ['26875/MH','26771/SIB','26803/SM','26773/RK','COM405','26772/MH','EMS'],
-        TUE: ['26771/SIB','PLC LAB','PLC LAB','26772/MH','26772/MH','26772/MH','EMS'],
-        WED: ['26773/RK','21803/TR','21803/TR','26772/MH','26875/MH','COM405','COM405'],
-        THU: ['26774/RI','X','26772/MH','26803/SM','26773/RK','SM','26771/SIB']
+        SUN: ['26774/RK','25831/SM','26875/TR','26771/MH','COM405','COM405','X'],
+        MON: ['26875/TR','26771/MH','25831/SM','26773/RI','COM405','26772/TR','EMS'],
+        TUE: ['26771/MH','PLC LAB/TR','PLC LAB/TR','26772/TR','26772/TR','26772/TR','EMS'],
+        WED: ['26773/RI','25853/NA','25853/NA','26772/TR','26875/TR','COM405','COM405'],
+        THU: ['26774/RK','X','26772/TR','25831/SM','26773/RI','26771/MH','26771/MH']
     }
 };
 
+// Teacher Login: ID=T001, Reg=REG001, Short=SM (example)
 const TEACHER_CREDENTIALS = {
-    "teacher01": {password:"123456", teacherId:1},
-    "teacher02": {password:"123456", teacherId:2},
-    "teacher03": {password:"123456", teacherId:3},
-    "teacher04": {password:"123456", teacherId:4},
-    "teacher05": {password:"123456", teacherId:5},
-    "teacher06": {password:"123456", teacherId:6},
-    "teacher07": {password:"123456", teacherId:7}
+    "T001": {reg:"REG001", teacherId:1},
+    "T002": {reg:"REG002", teacherId:2},
+    "T003": {reg:"REG003", teacherId:3},
+    "T004": {reg:"REG004", teacherId:4},
+    "T005": {reg:"REG005", teacherId:5},
+    "T006": {reg:"REG006", teacherId:6}
 };
 
 // 30 Hadith - one per day of month
@@ -134,6 +133,34 @@ const HADITH_LIST = [
 function getTodayHadith(){
     const day = new Date().getDate() - 1;
     return HADITH_LIST[day % 30];
+}
+
+function getBanglaDate(d){
+    const bMonths=['বৈশাখ','জ্যৈষ্ঠ','আষাঢ়','শ্রাবণ','ভাদ্র','আশ্বিন','কার্তিক','অগ্রহায়ণ','পৌষ','মাঘ','ফাল্গুন','চৈত্র'];
+    const m=d.getMonth(),dy=d.getDate();
+    let bi=m>=3?m-3:m+9;
+    let bd=dy>=14?dy-13:dy+17;
+    if(bd>30){bd-=30;bi=(bi+1)%12;}
+    const bn=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+    const bds=String(bd).split('').map(c=>bn[c]).join('');
+    return bds+' '+bMonths[bi]+', ১৪৩৩';
+}
+
+function getHijriDate(d){
+    const hMonths=['মুহাররম','সফর','রবিউল আউয়াল','রবিউস সানি','জুমাদাল উলা','জুমাদাস সানি','রজব','শাবান','রমজান','শাওয়াল','জিলকদ','জিলহজ'];
+    const jd=Math.floor(d.getTime()/86400000)+2440588;
+    const l=jd-1948440+10632;
+    const n=Math.floor((l-1)/10631);
+    const lr=l-10631*n+354;
+    const j=(Math.floor((10985-lr)/5316))*(Math.floor((50*lr)/17719))+(Math.floor(lr/5670))*(Math.floor((43*lr)/15238));
+    const lr2=lr-(Math.floor((30-j)/15))*(Math.floor((17719*j)/50))-(Math.floor(j/16))*(Math.floor((15238*j)/43))+29;
+    const hm=Math.floor((24*lr2)/709);
+    const hd=lr2-Math.floor((709*hm)/24);
+    const hy=30*n+j-30;
+    const bn=['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+    const hds=String(hd).split('').map(c=>bn[c]).join('');
+    const hys=String(hy).split('').map(c=>bn[c]).join('');
+    return hds+' '+hMonths[hm-1]+', '+hys+' হিজরী';
 }
 
 // Generate semester GPAs (1-8 semesters)

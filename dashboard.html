@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>⚡ Dashboard - Electrical Technology Portal</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/premium.css">
 </head>
 <body>
     <div class="app-wrapper">
@@ -22,6 +23,7 @@
                 </button>
             </div>
         </aside>
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
         <!-- Main -->
         <div class="main-content" id="mainContent">
@@ -82,10 +84,108 @@
     <!-- Toast -->
     <div id="toastContainer" style="position:fixed;bottom:24px;right:24px;z-index:9999"></div>
 
-    <script src="data.js"></script>
-    <script src="pages1.js"></script>
-    <script src="pages2.js"></script>
-    <script src="pages3.js"></script>
-    <script src="app.js"></script>
+    <script src="js/data.js?v=99"></script>
+    <script>
+// Pages Part 1 - INLINE
+function render_dashboard(){
+  var s=session;
+  var hour=new Date().getHours();
+  var salam=hour<12?"সুপ্রভাত":"সুসন্ধ্যা";
+  var greet="আসসালামু আলাইকুম। "+salam+", "+(s.nameBn||s.name)+"!";
+  if(lang==="en") greet="Assalamu Alaikum. Good "+(hour<12?"Morning":"Evening")+", "+s.name+"!";
+  var h='<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px">';
+  h+='<div style="flex:1;min-width:280px"><div class="section-header"><div class="section-title">'+greet+'</div>';
+  h+='<div class="section-desc">'+(lang==="bn"?"ফরিদপুর পলিটেকনিক ইনস্টিটিউট | ইলেকট্রিক্যাল টেকনোলজি":"Faridpur Polytechnic | Electrical Technology")+'</div></div></div>';
+  h+='<div class="card" style="min-width:260px;text-align:center;padding:16px">';
+  h+='<div id="liveClock" style="font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent"></div>';
+  h+='<div id="engDate" style="font-size:0.85rem;margin:4px 0"></div>';
+  h+='<div id="bnDate" style="font-size:0.8rem;color:var(--accent)"></div>';
+  h+='<div id="hjDate" style="font-size:0.8rem;color:var(--accent3)"></div></div></div>';
+  var hadith=getTodayHadith();
+  h+='<div class="card" style="margin-bottom:20px;border-left:4px solid var(--accent3)">';
+  h+='<div class="card-header"><span class="card-title">'+(lang==="bn"?"📖 আজকের হাদিস":"📖 Daily Hadith")+'</span><span class="badge badge-success">'+hadith.ref+'</span></div>';
+  h+='<p style="font-size:1rem;line-height:1.8">'+hadith.bn+'</p>';
+  h+='<p style="font-size:0.85rem;color:var(--accent2);margin-top:6px;font-style:italic">'+hadith.en+'</p></div>';
+  h+='<div class="grid-4">';
+  h+='<div class="stat-card animate-in"><div class="stat-value">'+SUBJECTS.length+'</div><div class="stat-label">'+(lang==="bn"?"সাবজেক্ট":"Subjects")+'</div></div>';
+  h+='<div class="stat-card animate-in"><div class="stat-value">'+TEACHERS.length+'</div><div class="stat-label">'+(lang==="bn"?"শিক্ষক":"Teachers")+'</div></div>';
+  h+='<div class="stat-card animate-in"><div class="stat-value">'+STUDENTS.length+'</div><div class="stat-label">'+(lang==="bn"?"শিক্ষার্থী":"Students")+'</div></div>';
+  h+='<div class="stat-card animate-in"><div class="stat-value">7</div><div class="stat-label">'+(lang==="bn"?"সেমিস্টার":"Semester")+'</div></div></div>';
+  var dayIdx=new Date().getDay();
+  var dayMap={0:"SUN",1:"MON",2:"TUE",3:"WED",4:"THU"};
+  var today=dayMap[dayIdx]||null;
+  if(today){var ts=ROUTINE.schedule[today]||[];
+  h+='<div class="card" style="margin-top:16px"><div class="card-header"><span class="card-title">'+(lang==="bn"?"📅 আজকের ক্লাস":"📅 Today")+' ('+today+')</span></div><div style="display:flex;gap:8px;flex-wrap:wrap">';
+  for(var ti=0;ti<ts.length;ti++){h+='<div class="badge badge-info" style="padding:8px 14px">'+ROUTINE.times[ti]+': '+ts[ti]+'</div>';}
+  h+='</div></div>';
+  } else {
+    h+='<div class="card" style="margin-top:16px"><div class="card-header"><span class="card-title">'+(lang==="bn"?"🎉 আজ ছুটির দিন":"🎉 Holiday Today")+'</span></div><p style="padding:8px;color:var(--text2)">'+(lang==="bn"?"শুক্র/শনিবার ক্লাস নেই।":"No classes on Friday/Saturday.")+'</p></div>';
+  }
+  return h;
+}
+function after_dashboard(){
+  function uc(){var now=new Date();var el=document.getElementById("liveClock");if(!el)return;
+  el.textContent=now.toLocaleTimeString("bn-BD",{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:true});
+  document.getElementById("engDate").textContent=now.toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  document.getElementById("bnDate").textContent=getBanglaDate(now);
+  document.getElementById("hjDate").textContent=getHijriDate(now);}
+  uc();window._clockInterval=setInterval(uc,1000);
+}
+function render_subjects(){
+  var h='<div class="section-header"><div class="section-title">'+(lang==="bn"?"📚 সাবজেক্ট সমূহ":"📚 Subjects")+'</div></div><div class="grid-auto">';
+  for(var i=0;i<SUBJECTS.length;i++){var s=SUBJECTS[i];
+  h+='<div class="card subject-card animate-in" style="cursor:pointer" onclick="openSubjectDetail(\''+s.code+'\')">';
+  h+='<div class="subject-code">'+s.code+'</div><div class="subject-name">'+(lang==="bn"?s.nameBn:s.name)+'</div>';
+  h+='<div class="subject-teacher">'+(lang==="bn"?s.teacherBn:s.teacher)+'</div>';
+  h+='<div style="margin-top:8px"><span class="badge badge-info">Credit: '+s.credit+'</span> <span class="badge badge-warning">'+s.type+'</span></div></div>';}
+  h+='</div>';return h;
+}
+window.openSubjectDetail=function(code){
+  var sub=null;for(var i=0;i<SUBJECTS.length;i++){if(SUBJECTS[i].code===code){sub=SUBJECTS[i];break;}}
+  if(!sub)return;
+  var tabs=["classtest","quiztest","midexam","attendance","results","syllabus"];
+  var tbn=["ক্লাস টেস্ট","কুইজ","মিড","অ্যাটেন্ডেন্স","রেজাল্ট","সিলেবাস"];
+  var ten=["Class Test","Quiz","Mid","Attendance","Results","Syllabus"];
+  var icons=["📝","🧠","📋","✅","📊","📖"];
+  var h='<div style="display:flex;justify-content:space-between;margin-bottom:16px"><h2>'+sub.code+' - '+(lang==="bn"?sub.nameBn:sub.name)+'</h2><button class="btn btn-secondary" onclick="closeModal()">✕</button></div>';
+  h+='<div class="grid-auto" style="gap:10px">';
+  for(var t=0;t<tabs.length;t++){
+    h+='<div class="card" style="cursor:pointer;padding:16px;text-align:center" onclick="showSubSection(\''+code+'\',\''+tabs[t]+'\')">';
+    h+='<div style="font-size:1.5rem">'+icons[t]+'</div><div style="font-weight:600;margin-top:4px">'+(lang==="bn"?tbn[t]:ten[t])+'</div></div>';}
+  h+='</div><div id="subSectionContent" style="margin-top:16px"></div>';
+  openModal(h);
+};
+window.showSubSection=function(code,tab){
+  var el=document.getElementById("subSectionContent");var results=generateResults();var att=generateAttendance();var c="";
+  if(tab==="classtest"){var r=results[session.roll]?results[session.roll][code]:null;
+    c='<h3>📝 ক্লাস টেস্ট</h3><table><tr><th>CT1</th><th>CT2</th></tr><tr><td>'+(r?r.ct1:"-")+'</td><td>'+(r?r.ct2:"-")+'</td></tr></table>';
+  }else if(tab==="quiztest"){var r2=results[session.roll]?results[session.roll][code]:null;
+    c='<h3>🧠 কুইজ</h3><table><tr><th>Q1</th><th>Q2</th></tr><tr><td>'+(r2?r2.quiz1:"-")+'</td><td>'+(r2?r2.quiz2:"-")+'</td></tr></table>';
+  }else if(tab==="midexam"){var r3=results[session.roll]?results[session.roll][code]:null;
+    c='<h3>📋 মিড</h3><table><tr><th>Mid/40</th></tr><tr><td>'+(r3?r3.mid:"-")+'</td></tr></table>';
+  }else if(tab==="attendance"){var sa=att[session.roll]?att[session.roll][code]:null;var pct=sa?Math.round((sa.attended/sa.total)*100):0;
+    c='<h3>✅ অ্যাটেন্ডেন্স</h3><p>'+pct+'% ('+(sa?sa.attended:0)+'/'+(sa?sa.total:0)+')</p><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div>';
+  }else if(tab==="results"){var r4=results[session.roll]?results[session.roll][code]:null;
+    c='<h3>📊 রেজাল্ট</h3><table><tr><th>CT1</th><th>CT2</th><th>Q1</th><th>Q2</th><th>Mid</th></tr><tr><td>'+(r4?r4.ct1:"-")+'</td><td>'+(r4?r4.ct2:"-")+'</td><td>'+(r4?r4.quiz1:"-")+'</td><td>'+(r4?r4.quiz2:"-")+'</td><td>'+(r4?r4.mid:"-")+'</td></tr></table>';
+  }else if(tab==="syllabus"){c='<h3>📖 সিলেবাস</h3><p>CT: Chapter 1-3 | Mid: Chapter 1-6 | Final: Full</p>';}
+  el.innerHTML=c;
+};
+function render_routine(){
+  var h='<div class="section-header"><div class="section-title">'+(lang==="bn"?"📅 ক্লাস রুটিন (A গ্রুপ)":"📅 Routine (A Group)")+'</div></div>';
+  h+='<div class="card"><div class="table-container"><table><thead><tr><th>'+(lang==="bn"?"দিন":"Day")+'</th>';
+  for(var t=0;t<ROUTINE.times.length;t++){h+='<th>'+ROUTINE.times[t]+'</th>';}
+  h+='</tr></thead><tbody>';
+  for(var d=0;d<ROUTINE.days.length;d++){
+    var isT=new Date().getDay()===(d===0?0:d+1);
+    h+='<tr style="'+(isT?"background:rgba(245,158,11,0.1)":"")+'"><td style="font-weight:700">'+(lang==="bn"?ROUTINE.daysBn[d]:ROUTINE.days[d])+'</td>';
+    var sc=ROUTINE.schedule[ROUTINE.days[d]];
+    for(var c=0;c<sc.length;c++){h+='<td>'+sc[c]+'</td>';}
+    h+='</tr>';}
+  h+='</tbody></table></div></div>';return h;
+}
+    </script>
+    <script src="js/pages2.js?v=99"></script>
+    <script src="js/pages3.js?v=99"></script>
+    <script src="js/app.js?v=99"></script>
 </body>
 </html>
